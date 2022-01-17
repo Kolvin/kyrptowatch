@@ -1,5 +1,6 @@
 {
-  "name": "app",
+  "name": "kyrptowatch",
+  "description": "a small application to display prices of cryptocurrencies",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -34,5 +35,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "keywords": [
+    "node.js",
+    "crytpocurrency",
+    "api"
+  ]
 }

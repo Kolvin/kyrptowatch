@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  app:
+    container_name: app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/usr/src/$PROJECT_NAME
+    build:
+      target: dev
+      context: .
+      args:
+        NODE_VERSION: $NODE_VERSION
+        PROJECT_NAME: $PROJECT_NAME
+        NODE_ENV: $NODE_ENV
+        NPM_TOKEN: $NPM_TOKEN

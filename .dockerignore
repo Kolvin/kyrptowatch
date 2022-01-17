@@ -1,0 +1,12 @@
+# build files
+.dockerignore
+Dockerfile
+.git
+.gitignore
+.idea
+.env
+.env.example
+
+# app files
+app/node_modules
+app/npm-debug.log

@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  app:
+    container_name: prod-app
+    ports:
+      - "8080:80"
+    build:
+      target: cloud
+      context: .
+      args:
+        NODE_VERSION: $NODE_VERSION
+        PROJECT_NAME: $PROJECT_NAME
+        NGINX_VERSION: $NGINX_VERSION
+        NODE_ENV: $NODE_ENV
+        NPM_TOKEN: $NPM_TOKEN

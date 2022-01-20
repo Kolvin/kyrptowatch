@@ -39,7 +39,9 @@
   "keywords": [
     "node.js",
     "crytpocurrency",
-    "api"
+    "api",
+    "tailwindcss",
+    "react"
   ],
   "devDependencies": {
     "autoprefixer": "^10.4.2",

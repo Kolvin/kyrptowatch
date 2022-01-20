@@ -1,3 +1,6 @@
+# Krytpowatch
+![Alt text](.docs/service-ui.png?raw=true "Optional Title")
+
 # Local Environment Visual
 ![Alt text](.docs/dev-env-visual.png?raw=true "Optional Title")
 
@@ -12,7 +15,7 @@ cp .env.example .env
 docker-compose up -d
 ```
 
-`Then vist; ` http://0.0.0.0:3000`
+`Then vist; ` **_http://0.0.0.0:3000_**`
 
 
 # Execute Service Commands

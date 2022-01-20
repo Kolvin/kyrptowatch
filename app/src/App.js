@@ -1,3 +1,7 @@
+import axios from "axios";
+import {useEffect, useState} from "react";
+import KryptoCard from "./components/KryptoCard/Index";
+
 function App() {
     const currencyOptions = [
         {code: 'GBP', symbol: '£',},
@@ -5,13 +9,34 @@ function App() {
         {code: 'EUR', symbol: '€',},
     ];
 
+    const [cryptocurrencies, setCryptocurrencies] = useState([]);
+    const [search, setSearch] = useState('');
+    const [currency, setCurrency] = useState(currencyOptions[0].code);
+
+    useEffect(() => {
+        axios
+            .get(
+                "https://api.coingecko.com/api/v3/coins/markets?vs_currency="+currency+"&order=market_cap_desc&per_page=1000&page=1&sparkline=true"
+            )
+            .then((response) => {
+                setCryptocurrencies(response.data);
+            })
+            .catch((err) => {
+                console.log("api error", err);
+            });
+    }, [currency]);
+
     const handleSearch = (e) => {
-        console.log(e.target.value)
+        setSearch(e.target.value);
     }
 
     const handleCurrency = (e) => {
-        console.log(e.target.value)
+        setCurrency(e.target.value);
     }
+
+    const filteredCrypto = cryptocurrencies.filter(crypto =>
+        crypto.name.toLowerCase().includes(search.toLowerCase())
+    )
 
     return (
         <>
@@ -39,7 +64,7 @@ function App() {
                       id="currency"
                       name="currency"
                       className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                      defaultValue={currencyOptions[0].code}
+                      defaultValue={currency}
                       onChange={handleCurrency}
                   >
                       {currencyOptions.map((option) => {
@@ -51,13 +76,18 @@ function App() {
 
           <div className="md:container md:mx-auto px-6 py-2 flex justify-between items-center">
               <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
-                  <div>KryptoCard</div>
-                  <div>KryptoCard</div>
-                  <div>KryptoCard</div>
-                  <div>KryptoCard</div>
-                  <div>KryptoCard</div>
-                  <div>KryptoCard</div>
-                  <div>KryptoCard</div>
+                  {filteredCrypto.map((crypto) => {
+                      return (
+                          <KryptoCard
+                              key={crypto.name}
+                              name={crypto.name}
+                              symbol={crypto.symbol}
+                              iconURL={crypto.image}
+                              displayCurrency={currencyOptions.find(option => option.code === currency).symbol}
+                              currentPrice={crypto.current_price}
+                          />
+                      );
+                  })}
               </ul>
           </div>
         </>

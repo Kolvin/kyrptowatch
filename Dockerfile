@@ -1,7 +1,7 @@
 # Global Args
+ARG NGINX_VERSION=stable-alpine@sha256:c3ffe58e1eb09a16b3952c2bbe92363c50084f55a0da5c2ad38d6ae798c64599
 ARG NODE_VERSION=lts-alpine3.15@sha256:f21f35732964a96306a84a8c4b5a829f6d3a0c5163237ff4b6b8b34f8d70064b
 ARG NODE_ENV=production
-ARG PROJECT_NAME=kyrptowatch
 
 # Install dependecies in ephemeral container
 FROM node:$NODE_VERSION as deps
@@ -54,9 +54,9 @@ USER node:node
 EXPOSE 3000
 CMD ["npm", "run", "start"]
 
-ARG NGINX_VERSION=stable-alpine@sha256:c3ffe58e1eb09a16b3952c2bbe92363c50084f55a0da5c2ad38d6ae798c64599
 FROM nginx:$NGINX_VERSION as cloud
-COPY --from=build /usr/src/$PROJECT_NAME/public /usr/share/nginx/html
+ARG PROJECT_NAME=kyrptowatch
+COPY --from=build /usr/src/$PROJECT_NAME/build /usr/share/nginx/html
 COPY .docker/nginx/default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

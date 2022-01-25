@@ -9,13 +9,14 @@
 - [Docker](https://docs.docker.com/get-docker/) + [Docker Compose](https://docs.docker.com/compose/install/) are required to run the project
 
 # Starting the project
-
+ - Using [BuildKit](https://www.docker.com/blog/faster-builds-in-compose-thanks-to-buildkit-support/
+   ) to optimise builds
 ```
 cp .env.example .env
-docker-compose up -d
+COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose up -d
 ```
 
-`Then vist; ` **_http://0.0.0.0:3000_**`
+`Then vist ->` http://0.0.0.0:3000
 
 
 # Execute Service Commands

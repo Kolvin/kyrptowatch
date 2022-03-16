@@ -1,10 +1,10 @@
 # Global Args
-ARG NGINX_VERSION=stable-alpine@sha256:c3ffe58e1eb09a16b3952c2bbe92363c50084f55a0da5c2ad38d6ae798c64599
-ARG NODE_VERSION=lts-alpine3.15@sha256:f21f35732964a96306a84a8c4b5a829f6d3a0c5163237ff4b6b8b34f8d70064b
+ARG NGINX_TAG=stable-alpine@sha256:74694f2de64c44787a81f0554aa45b281e468c0c58b8665fafceda624d31e556
+ARG NODE_TAG=lts-alpine3.15@sha256:2c6c59cf4d34d4f937ddfcf33bab9d8bbad8658d1b9de7b97622566a52167f2b
 ARG NODE_ENV=production
 
 # Install dependecies in ephemeral container
-FROM node:$NODE_VERSION as deps
+FROM node:$NODE_TAG as deps
 ARG NPM_TOKEN=''
 ENV NODE_ENV=$NODE_ENV
 WORKDIR /app
@@ -18,7 +18,7 @@ RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc && \
    rm -f .npmrc
 
 # Build src in another ephemeral container
-FROM node:$NODE_VERSION as build
+FROM node:$NODE_TAG as build
 ARG PROJECT_NAME=kyrptowatch
 WORKDIR /usr/src/$PROJECT_NAME
 
@@ -31,7 +31,13 @@ COPY --chown=node:node --from=deps /app/node_modules /usr/src/$PROJECT_NAME/node
 # Generate build
 RUN npm run build
 
-FROM node:$NODE_VERSION as dev
+FROM nginx:$NGINX_TAG as cloud
+ARG PROJECT_NAME=kyrptowatch
+COPY --from=build /usr/src/$PROJECT_NAME/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+FROM node:$NODE_TAG as dev
 ARG PROJECT_NAME=kyrptowatch
 ARG NODE_ENV=development
 ENV NODE_ENV=$NODE_ENV
@@ -53,10 +59,3 @@ RUN npm install
 USER node:node
 EXPOSE 3000
 CMD ["npm", "run", "start"]
-
-FROM nginx:$NGINX_VERSION as cloud
-ARG PROJECT_NAME=kyrptowatch
-COPY --from=build /usr/src/$PROJECT_NAME/build /usr/share/nginx/html
-COPY .docker/nginx/default.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]

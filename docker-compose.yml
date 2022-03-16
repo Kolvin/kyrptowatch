@@ -10,7 +10,7 @@ services:
       target: dev
       context: .
       args:
-        NODE_VERSION: $NODE_VERSION
+        NODE_TAG: $NODE_TAG
         PROJECT_NAME: $PROJECT_NAME
         NODE_ENV: $NODE_ENV
         NPM_TOKEN: $NPM_TOKEN

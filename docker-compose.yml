@@ -6,6 +6,8 @@ services:
       - "3000:3000"
     volumes:
       - ./app:/usr/src/$PROJECT_NAME
+    environment:
+      REACT_APP_API_REFRESH_INTERVAL: 10000
     build:
       target: dev
       context: .

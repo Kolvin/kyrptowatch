@@ -3,7 +3,7 @@
 
 name: Lint & Test
 
-on: [workflow_call, push]
+on: workflow_call
 
 jobs:
   lint-and-test:

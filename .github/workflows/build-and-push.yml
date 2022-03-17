@@ -1,6 +1,6 @@
 name: Build & Push
 
-on:
+on: 
   push:
     tags: [ 'v*.*.*' ]
 
@@ -10,8 +10,10 @@ env:
   REPOSITORY_OWNER: kolvin
 
 jobs:
+  lint-and-test:
+    uses: ./.github/workflows/lint-and-test.yml
   publish:
-    needs: build
+    needs: lint-and-test
     runs-on: ubuntu-latest
     permissions:
       contents: read

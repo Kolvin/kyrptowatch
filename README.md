@@ -4,11 +4,16 @@
 # Local Environment Visual
 ![Alt text](.docs/dev-env-visual.png?raw=true "Optional Title")
 
+# Run the image
+First youll need to [authenticate with github registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
 
-# Prerequisites
+```
+docker run ghcr.io/kolvin/kyrptowatch:latest
+```
+
+# Or run the project locally
+## Prerequisites
 - [Docker](https://docs.docker.com/get-docker/) + [Docker Compose](https://docs.docker.com/compose/install/) are required to run the project
-
-# Starting the project
  - Using [BuildKit](https://www.docker.com/blog/faster-builds-in-compose-thanks-to-buildkit-support/
    ) to optimise builds
 ```

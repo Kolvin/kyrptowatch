@@ -3,9 +3,11 @@
 
 name: Lint & Test
 
-on: 
+on:
   workflow_call:
-  push: [branches]
+  push:
+    branches: '**'
+
 
 jobs:
   lint-and-test:

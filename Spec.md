@@ -1,5 +1,4 @@
 # Kyrptowatch
-![Alt text](.docs/project-spec.jpg?raw=true "blueprint")
 ## Purpose
  - I want to build a service that can consume and display information on crytpocurrencies
 
@@ -22,7 +21,7 @@
 
 ## Whats this gonna look like?
  - I'm aiming to keep the UI pretty simple for an MVP so here is a rough UI diagram to get me started which I created using [Miro](https://miro.com);
-![UI](.docs/inital-ui.jpg?raw=true "Im not a designer okay...")
+![UI](.docs/project-spec.jpg?raw=true "Im not a designer okay...")
 
 
 ## Nice to haves

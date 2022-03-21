@@ -1,5 +1,5 @@
 # Kyrptowatch
-___
+![Alt text](.docs/project-spec.jpg?raw=true "blueprint")
 ## Purpose
  - I want to build a service that can consume and display information on crytpocurrencies
 

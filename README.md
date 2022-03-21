@@ -1,8 +1,8 @@
-# Krytpowatch
-![Alt text](.docs/service-ui.png?raw=true "Optional Title")
+# Krytpowatch | [Spec](Spec.md)
+![Alt text](.docs/service-ui.png?raw=true "service")
 
 # Local Environment Visual
-![Alt text](.docs/dev-env-visual.png?raw=true "Optional Title")
+![Alt text](.docs/dev-env-visual.png?raw=true "env")
 
 # Run the image
 First youll need to [authenticate with github registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
